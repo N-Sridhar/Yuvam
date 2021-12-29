@@ -3,24 +3,74 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/moment": "^2.11.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.6",
+    "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
+    "date-fns": "^2.28.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-spring": "^9.3.3",
     "web-vitals": "^2.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
+    "node-sass": "^7.0.1",
+    "prettier": "^2.5.1",
+    "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint --fix --max-warnings=0",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|md|html)\"",
+    "scss-lint": "sass-lint 'src/**/*.scss' -v -f table --max-warnings 0",
+    "scss-lint:fix": "sass-lint-auto-fix 'src/**/*.scss' -d -h -c .sass-lint-auto-fix.yml"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "npm run eslint:fix",
+      "prettier --write \"**/*.+(js|jsx)\""
+    ],
+    "*.+(json|yml|yaml|md)": [
+      "prettier --write \"**/*.+(json|yml|yaml|md)\""
+    ],
+    "*.+(css|scss)": [
+      "npm run scss-lint:fix",
+      "npm run scss-lint"
     ]
   },
   "browserslist": {
